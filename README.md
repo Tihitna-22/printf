@@ -17,7 +17,7 @@ What you should learn from this project:
 - Prints a string to the standard output, according to a given format
 - All files were created and compiled on Ubuntu 14.04.4 LTS using GCC 4.8.4 wit\
 h the command `gcc -Wall -Werror -Wextra -pedantic *.c`
-- All files were linted for syntax and style with [Betty](https://github.com/ho\
+- All files were linted for syntax and style with Betty
 lbertonschool/Betty)
 - Returns the number of characters in the output string on success, -1 otherwis\
 e

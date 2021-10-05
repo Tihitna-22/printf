@@ -45,15 +45,15 @@ print_num(i, &m);
 break;
 case 'i':
 i = va_arg(list, int);
-print_num(i, &m);
+_print_number(i, &m);
 break;
 case 'r':
 s = va_arg(list, char *);
-reverse_str(s, &m);
+_rev_string(s, &m);
 break;
 case 'b':
 j = va_arg(list, int);
-_printBinary(j, &m);
+_print_binary(j, &m);
 break;
 case 'R':
 s = va_arg(list, char *);

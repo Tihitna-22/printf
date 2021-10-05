@@ -1,11 +1,11 @@
 #include"main.h"
 /**
- * _print_number - prints a number
+ * print_num - prints a number
  * @n: The character to print
  * @k: counter through string
  * Return: nothing
  */
-void _print_number(int n, int *k)
+void print_num(int n, int *k)
 {
 int x;
 if (n == 0)

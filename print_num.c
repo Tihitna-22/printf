@@ -5,7 +5,7 @@
  * @k: counter through string
  * Return: nothing
  */
-void print_num(int n, int *k)
+void _print_number(int n, int *k)
 {
 int x;
 if (n == 0)

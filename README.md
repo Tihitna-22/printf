@@ -18,7 +18,6 @@ What you should learn from this project:
 - All files were created and compiled on Ubuntu 14.04.4 LTS using GCC 4.8.4 wit\
 h the command `gcc -Wall -Werror -Wextra -pedantic *.c`
 - All files were linted for syntax and style with Betty
-lbertonschool/Betty)
 - Returns the number of characters in the output string on success, -1 otherwis\
 e
 - Call it this way: `_printf("format string", arguments...)` where `format stri\

@@ -9,12 +9,13 @@
 
 void _rev_string(char *s, int *k)
 {
-int l, count;
-l = _string_length(s);
-count = l - 1;
-while (count >= 0)
-{
-_putchar(s[count], j);
-count--;
+	int len = _strlen(s);
+	int count = len - 1;
+
+	while (count >= 0)
+	{
+		_putchar(s[count], k);
+		count--;
+	}
 }
-}
+

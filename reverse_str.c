@@ -7,7 +7,7 @@
  * Return: *s
  */
 
-void reverse_str(char *s, int *j)
+void _rev_string(char *s, int *k)
 {
 int l, count;
 l = _string_length(s);

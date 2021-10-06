@@ -1,4 +1,4 @@
-#include "mainn.h"
+#include "main.h"
 
 /**
  * _isdigit - checks if character is digit
@@ -8,7 +8,7 @@
  */
 int _isdigit(int c)
 {
-return (c >= '0' && c <= '9');
+	return (c >= '0' && c <= '9');
 }
 
 /**
@@ -19,110 +19,112 @@ return (c >= '0' && c <= '9');
  */
 int _strlen(char *s)
 {
-int i = 0;
+	int i = 0;
 
-while (*s++)
-i++;
-return (i);
+	while (*s++)
+		i++;
+	return (i);
 }
+
 /**
  * print_number - prints a number with options
  * @str: the base number as a string
- * @par: the parameter struct
+ * @params: the parameter struct
  *
  * Return: chars printed
  */
-int print_number(char *str, p_t *par)
+int print_number(char *str, params_t *params)
 {
-unsigned int i;
-int neg;
-i = _strlen(str);
-neg = (!par->unsign && *str == '-');
-if (!par->precision && *str == '0' && !str[1])
-str = "";
-if (neg)
-{
-str++;
-i--;
-}
-if (par->precision != UINT_MAX)
-while (i++ < par->precision)
-*--str = '0';
-if (neg)
-*--str = '-';
+	unsigned int i = _strlen(str);
+	int neg = (!params->unsign && *str == '-');
 
-if (!par->minus_flag)
-return (print_number_right_shift(str, par));
-else
-return (print_number_left_shift(str, par));
+	if (!params->precision && *str == '0' && !str[1])
+		str = "";
+	if (neg)
+	{
+		str++;
+		i--;
+	}
+	if (params->precision != UINT_MAX)
+		while (i++ < params->precision)
+			*--str = '0';
+	if (neg)
+		*--str = '-';
+
+	if (!params->minus_flag)
+		return (print_number_right_shift(str, params));
+	else
+		return (print_number_left_shift(str, params));
 }
 
 /**
  * print_number_right_shift - prints a number with options
  * @str: the base number as a string
- * @par: the parameter struct
+ * @params: the parameter struct
+ *
  * Return: chars printed
  */
-int print_number_right_shift(char *str, p_t *par)
+int print_number_right_shift(char *str, params_t *params)
 {
-unsigned int n = 0, neg, neg2, i = _strlen(str);
-char pad_char = ' ';
-if (par->zero_flag && !par->minus_flag)
-pad_char = '0';
-neg = neg2 = (!par->unsign && *str == '-');
-if (neg && i < par->width && pad_char == '0' && !par->minus_flag)
-str++;
-else
-neg = 0;
-if ((par->plus_flag && !neg2) ||
-(!par->plus_flag && par->space_flag && !neg2))
-i++;
-if (neg && pad_char == '0')
-n += _putchar('-');
-if (par->plus_flag && !neg2 && pad_char == '0' && !par->unsign)
-n += _putchar('+');
-else if (!par->plus_flag && par->space_flag && !neg2 &&
-!par->unsign && par->zero_flag)
-n += _putchar(' ');
-while (i++ < par->width)
-n += _putchar(pad_char);
-if (neg && pad_char == ' ')
-n += _putchar('-');
-if (par->plus_flag && !neg2 && pad_char == ' ' && !par->unsign)
-n += _putchar('+');
-else if (!par->plus_flag && par->space_flag && !neg2 &&
-!par->unsign && !par->zero_flag)
-n += _putchar(' ');
-n += _puts(str);
-return (n);
+	unsigned int n = 0, neg, neg2, i = _strlen(str);
+	char pad_char = ' ';
+
+	if (params->zero_flag && !params->minus_flag)
+		pad_char = '0';
+	neg = neg2 = (!params->unsign && *str == '-');
+	if (neg && i < params->width && pad_char == '0' && !params->minus_flag)
+		str++;
+	else
+		neg = 0;
+	if ((params->plus_flag && !neg2) ||
+		(!params->plus_flag && params->space_flag && !neg2))
+		i++;
+	if (neg && pad_char == '0')
+		n += _putchar('-');
+	if (params->plus_flag && !neg2 && pad_char == '0' && !params->unsign)
+		n += _putchar('+');
+	else if (!params->plus_flag && params->space_flag && !neg2 &&
+		!params->unsign && params->zero_flag)
+		n += _putchar(' ');
+	while (i++ < params->width)
+		n += _putchar(pad_char);
+	if (neg && pad_char == ' ')
+		n += _putchar('-');
+	if (params->plus_flag && !neg2 && pad_char == ' ' && !params->unsign)
+		n += _putchar('+');
+	else if (!params->plus_flag && params->space_flag && !neg2 &&
+		!params->unsign && !params->zero_flag)
+		n += _putchar(' ');
+	n += _puts(str);
+	return (n);
 }
 
 /**
  * print_number_left_shift - prints a number with options
  * @str: the base number as a string
- * @par: the parameter struct
+ * @params: the parameter struct
  *
  * Return: chars printed
  */
-int print_number_left_shift(char *str, p_t *par)
+int print_number_left_shift(char *str, params_t *params)
 {
-unsigned int n = 0, neg, neg2, i = _strlen(str);
-char pad_char = ' ';
+	unsigned int n = 0, neg, neg2, i = _strlen(str);
+	char pad_char = ' ';
 
-if (par->zero_flag && !par->minus_flag)
-pad_char = '0';
-neg = neg2 = (!par->unsign && *str == '-');
-if (neg && i < par->width && pad_char == '0' && !par->minus_flag)
-str++;
-else
-neg = 0;
+	if (params->zero_flag && !params->minus_flag)
+		pad_char = '0';
+	neg = neg2 = (!params->unsign && *str == '-');
+	if (neg && i < params->width && pad_char == '0' && !params->minus_flag)
+		str++;
+	else
+		neg = 0;
 
-if (par->plus_flag && !neg2 && !par->unsign)
-n += _putchar('+'), i++;
-else if (par->space_flag && !neg2 && !par->unsign)
-n += _putchar(' '), i++;
-n += _puts(str);
-while (i++ < par->width)
-n += _putchar(pad_char);
-return (n);
+	if (params->plus_flag && !neg2 && !params->unsign)
+		n += _putchar('+'), i++;
+	else if (params->space_flag && !neg2 && !params->unsign)
+		n += _putchar(' '), i++;
+	n += _puts(str);
+	while (i++ < params->width)
+		n += _putchar(pad_char);
+	return (n);
 }

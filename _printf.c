@@ -6,39 +6,42 @@
  */
 int _printf(const char *format, ...)
 {
-int sum = 0;
-va_list list;
-char *s, *cr;
-p_t par = PARAMS_INIT;
-va_start(list, format);
-if (!format || (format[0] == '%' && !format[1]))
-return (-1);
-if (format[0] == '%' && format[1] == ' ' && !format[2])
-return (-1);
-for (s = (char *)format; *s; s++)
-{
-init_params(&par, list);
-if (*s != '%')
-{
-sum += _putchar(*s);
-continue;
-}
-cr = s;
-s++;
-while (get_flag(s, &par))
-s++;
-}
-s = get_width(s, &par, list);
-s = get_precision(s, &par, list);
-if (get_modifier(s, &par))
-s++;
-if (!get_specifier(s))
-sum += print_from_to(cr, s,
-par.l_modifier || par.h_modifier ? s - 1 : 0);
-else
-sum += get_print_func(s, list, &par);
-}
-_putchar(BUF_FLUSH);
-va_end(list);
-return (sum);
+	int sum = 0;
+	va_list ap;
+	char *p, *start;
+	params_t params = PARAMS_INIT;
+
+	va_start(ap, format);
+
+	if (!format || (format[0] == '%' && !format[1]))
+		return (-1);
+	if (format[0] == '%' && format[1] == ' ' && !format[2])
+		return (-1);
+	for (p = (char *)format; *p; p++)
+	{
+		init_params(&params, ap);
+		if (*p != '%')
+		{
+			sum += _putchar(*p);
+			continue;
+		}
+		start = p;
+		p++;
+		while (get_flag(p, &params)) /* while char at p is flag char */
+		{
+			p++; /* next char */
+		}
+		p = get_width(p, &params, ap);
+		p = get_precision(p, &params, ap);
+		if (get_modifier(p, &params))
+			p++;
+		if (!get_specifier(p))
+			sum += print_from_to(start, p,
+				params.l_modifier || params.h_modifier ? p - 1 : 0);
+		else
+			sum += get_print_func(p, ap, &params);
+	}
+	_putchar(BUF_FLUSH);
+	va_end(ap);
+	return (sum);
 }
